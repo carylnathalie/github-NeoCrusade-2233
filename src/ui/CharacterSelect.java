@@ -195,7 +195,7 @@ public class CharacterSelect extends JPanel {
                 previewName.setText(character.getName());
 
                 previewStats.setText(
-                        "HP: " + character.getHp() + "\n" +
+                        "HP: " + character.getHP() + "\n" +
                                 "ATK: " + character.getATK() + "\n" +
                                 "DEF: " + character.getDEF() + "\n" +
                                 "SPD: " + character.getSPD()

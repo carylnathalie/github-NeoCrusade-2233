@@ -26,47 +26,36 @@ public abstract class GameCharacter {
         this.spd = spd;
     }
 
+    // ===== SKILL CALL =====
+    public int useSkill(int choice){
+        switch(choice){
+            case 1:
+                if(cd1 == 0) return skill1();
+                break;
+            case 2:
+                if(cd2 == 0) return skill2();
+                break;
+            case 3:
+                if(cd3 == 0) return skill3();
+                break;
+        }
+        return 0; // skill failed (cooldown or invalid)
+    }
+
     // ===== GETTERS =====
-    public String getName(){
-        return name;
-    }
-
-    // BOTH styles supported (fix errors)
-    public int getHP(){
-        return hp;
-    }
-
-    public int getHp(){
-        return hp;
-    }
-
-    public int getEnergy(){
-        return energy;
-    }
-
-    public int getATK(){
-        return atk;
-    }
-
-    public int getDEF(){
-        return def;
-    }
-
-    public int getSPD(){
-        return spd;
-    }
-
-    public int getMaxHp(){
-        return maxHp;
-    }
+    public String getName(){ return name; }
+    public int getHP(){ return hp; }
+    public int getEnergy(){ return energy; }
+    public int getATK(){ return atk; }
+    public int getDEF(){ return def; }
+    public int getSPD(){ return spd; }
+    public int getMaxHp(){ return maxHp; }
 
     // ===== SETTERS =====
-    public void setHP(int hp){
-        this.hp = hp;
-    }
-
     public void setHp(int hp){
         this.hp = hp;
+        if(this.hp > maxHp) this.hp = maxHp;
+        if(this.hp < 0) this.hp = 0;
     }
 
     public void setMaxHp(int maxHp){
@@ -75,18 +64,7 @@ public abstract class GameCharacter {
 
     public void setEnergy(int energy){
         this.energy = energy;
-    }
-
-    public void setATK(int atk){
-        this.atk = atk;
-    }
-
-    public void setDEF(int def){
-        this.def = def;
-    }
-
-    public void setSPD(int spd){
-        this.spd = spd;
+        if(this.energy < 0) this.energy = 0;
     }
 
     // ===== LOGIC =====
@@ -95,7 +73,11 @@ public abstract class GameCharacter {
         if(reduced < 1) reduced = 1;
 
         hp -= reduced;
+
         if(hp < 0) hp = 0;
+
+        // DEBUG
+        System.out.println(name + " HP: " + hp);
     }
 
     public void useEnergy(int cost){
@@ -109,11 +91,17 @@ public abstract class GameCharacter {
         if(cd3 > 0) cd3--;
     }
 
+    public void resetCooldowns(){
+        cd1 = 0;
+        cd2 = 0;
+        cd3 = 0;
+    }
+
     public boolean isAlive(){
         return hp > 0;
     }
 
-    // ===== SKILLS =====
+    // ===== SKILLS (IMPLEMENT IN CHILD CLASSES) =====
     public abstract int skill1();
     public abstract int skill2();
     public abstract int skill3();
