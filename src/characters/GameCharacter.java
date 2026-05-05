@@ -42,16 +42,35 @@ public abstract class GameCharacter {
         return 0; // skill failed (cooldown or invalid)
     }
 
-    // ===== GETTERS =====
-    public String getName(){ return name; }
-    public int getHP(){ return hp; }
-    public int getEnergy(){ return energy; }
-    public int getATK(){ return atk; }
-    public int getDEF(){ return def; }
-    public int getSPD(){ return spd; }
-    public int getMaxHp(){ return maxHp; }
+    //GETTERS
+    public String getName(){
+        return name;
+    }
 
-    // ===== SETTERS =====
+    public int getHP(){
+        return hp;
+    }
+
+    public int getEnergy(){
+        return energy;
+    }
+
+    public int getATK(){
+        return atk;
+    }
+
+    public int getDEF(){
+        return def;
+    }
+
+    public int getSPD(){
+        return spd;
+    }
+    public int getMaxHp(){
+        return maxHp;
+    }
+
+    // SETTERS
     public void setHp(int hp){
         this.hp = hp;
         if(this.hp > maxHp) this.hp = maxHp;
@@ -67,7 +86,6 @@ public abstract class GameCharacter {
         if(this.energy < 0) this.energy = 0;
     }
 
-    // ===== LOGIC =====
     public void takeDamage(int dmg){
         int reduced = dmg - def;
         if(reduced < 1) reduced = 1;
@@ -76,7 +94,6 @@ public abstract class GameCharacter {
 
         if(hp < 0) hp = 0;
 
-        // DEBUG
         System.out.println(name + " HP: " + hp);
     }
 
@@ -101,7 +118,7 @@ public abstract class GameCharacter {
         return hp > 0;
     }
 
-    // ===== SKILLS (IMPLEMENT IN CHILD CLASSES) =====
+    //IMPLEMENT IN CHILD CLASSES
     public abstract int skill1();
     public abstract int skill2();
     public abstract int skill3();

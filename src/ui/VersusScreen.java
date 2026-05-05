@@ -28,7 +28,6 @@ public class VersusScreen extends JPanel {
 
         setBackground(Color.BLACK);
 
-        // ✅ LOAD IMAGES (FIXED)
         bg = new ImageIcon(getClass().getResource("/resources/bg_vs.jpg")).getImage();
         p1Img = loadImage(p1.getName().toLowerCase() + ".png");
         p2Img = loadImage(p2.getName().toLowerCase() + ".png");
@@ -67,7 +66,6 @@ public class VersusScreen extends JPanel {
         }).start();
     }
 
-    // ✅ SAFE IMAGE LOADER
     private Image loadImage(String file){
         try{
             java.net.URL url = getClass().getResource("/resources/" + file);
@@ -91,16 +89,13 @@ public class VersusScreen extends JPanel {
 
         Graphics2D g2 = (Graphics2D) g;
 
-        // ===== BACKGROUND =====
         if(bg != null){
             g2.drawImage(bg, 0, 0, getWidth(), getHeight(), this);
         }
 
-        // Dark overlay
         g2.setColor(new Color(0,0,0,150));
         g2.fillRect(0,0,getWidth(),getHeight());
 
-        // Flash effect
         if(flash > 0){
             g2.setColor(new Color(255,255,255,(int)(flash * 255)));
             g2.fillRect(0,0,getWidth(),getHeight());
@@ -113,7 +108,6 @@ public class VersusScreen extends JPanel {
         int imgW = (int)(300 * scale);
         int imgH = (int)(300 * scale);
 
-        // ===== PLAYER 1 IMAGE =====
         if(p1Img != null){
             g2.drawImage(p1Img,
                     getWidth()/4 - imgW/2 + p1Offset,

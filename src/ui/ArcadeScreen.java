@@ -17,9 +17,16 @@ public class ArcadeScreen extends JPanel {
     int round = 1;
     boolean isPlayerTurn = true;
 
+    Image attackGif;
+    boolean showAttackGif = false;
+    int gifX, gifY;
+
+    int spriteY, playerX, enemyX;
+
     Image bg;
     Image playerImg;
     Image enemyImg;
+
 
     private static final int IMG_SIZE = 220;
 
@@ -128,9 +135,13 @@ public class ArcadeScreen extends JPanel {
         int w = getWidth();
         int h = getHeight();
 
-        int spriteY = h / 2 - IMG_SIZE / 2;
-        int playerX = w / 4;
-        int enemyX = (w * 3) / 4;
+        if (showAttackGif && attackGif != null) {
+            g.drawImage(attackGif, gifX, gifY, 150, 150, this);
+        }
+
+        spriteY = h / 2 - IMG_SIZE / 2;
+        playerX = w / 4;
+        enemyX = (w * 3) / 4;
 
         if (playerImg != null)
             g.drawImage(playerImg, playerX - 110, spriteY, IMG_SIZE, IMG_SIZE, this);
@@ -157,11 +168,11 @@ public class ArcadeScreen extends JPanel {
         g.drawString(c.getName() + " " + c.getHP() + "/" + c.getMaxHp(), x, y - 5);
     }
 
-    // ===== SPAWN ENEMY =====
     void spawnEnemy() {
         enemy = EnemyFactory.getRandomEnemy();
 
-        // 🔥 MUCH LOWER HP FOR FAST GAME
+        attackGif = loadImage(".gif"); // your gif filename
+
         int baseHp = enemy.getMaxHp();
 
         int newHp = (int)(baseHp * 0.5); // cut HP in half
@@ -190,6 +201,19 @@ public class ArcadeScreen extends JPanel {
         if (skill == 2) dmg = player.skill2();
         if (skill == 3) dmg = player.skill3();
 
+        showAttackGif = true;
+        gifX = enemyX - 75; // center on enemy
+        gifY = spriteY;
+        repaint();
+
+// Hide after 1 second
+        Timer gifTimer = new Timer(1000, e -> {
+            showAttackGif = false;
+            repaint();
+        });
+        gifTimer.setRepeats(false);
+        gifTimer.start();
+
         // 🔥 ALWAYS ATTACK
         if (dmg == 0) {
             dmg = 30;
@@ -202,6 +226,10 @@ public class ArcadeScreen extends JPanel {
         player.reduceCooldowns();
 
         repaint();
+
+
+
+
 
         if (!enemy.isAlive()) {
             round++;

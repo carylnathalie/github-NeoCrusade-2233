@@ -52,7 +52,6 @@ public class HomeScreen extends JPanel {
                     g2.drawString(getText(), i, getHeight() - 10);
                 }
 
-                // ===== MAIN TEXT =====
                 g2.setColor(new Color(0, 255, 255));
                 g2.setFont(getFont());
                 g2.drawString(getText(), 0, getHeight() - 12);
@@ -75,7 +74,6 @@ public class HomeScreen extends JPanel {
         titlePanel.add(Box.createVerticalStrut(5));
         titlePanel.add(subtitle);
 
-        // ===== MENU PANEL (GAME STYLE) =====
         JPanel menuPanel = new JPanel();
         menuPanel.setLayout(new BoxLayout(menuPanel, BoxLayout.Y_AXIS));
         menuPanel.setOpaque(false);
@@ -92,7 +90,6 @@ public class HomeScreen extends JPanel {
 
         add(centerPanel, BorderLayout.CENTER);
 
-        // wrapper panel (glass effect)
         JPanel box = new JPanel();
         box.setLayout(new BoxLayout(box, BoxLayout.Y_AXIS));
         box.setBackground(new Color(0,0,0,150));
@@ -104,7 +101,6 @@ public class HomeScreen extends JPanel {
         JButton btnArcade = createNeonButton("ARCADE MODE", new Color(255,0,200));
         JButton btnQuit = createNeonButton("QUIT", new Color(255,140,0));
 
-        // spacing + add buttons
         box.add(Box.createVerticalStrut(15));
         box.add(btn1);
         box.add(Box.createVerticalStrut(10));
@@ -123,7 +119,6 @@ public class HomeScreen extends JPanel {
         subtitle.setHorizontalAlignment(SwingConstants.CENTER);
 
 
-        // ===== ACTIONS =====
         btn1.addActionListener(e -> {
             frame.setContentPane(new CharacterSelect(frame, 1));
             frame.revalidate();
@@ -142,7 +137,6 @@ public class HomeScreen extends JPanel {
         btnQuit.addActionListener(e -> System.exit(0));
     }
 
-    // ===== BUTTON STYLE =====
     private JButton createNeonButton(String text, Color color){
 
         JButton button = new JButton(text);
@@ -168,7 +162,6 @@ public class HomeScreen extends JPanel {
         return button;
     }
 
-    // ===== BACKGROUND =====
     @Override
     protected void paintComponent(Graphics g){
         super.paintComponent(g);

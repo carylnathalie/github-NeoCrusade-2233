@@ -87,38 +87,34 @@ public class CharacterSelect extends JPanel {
 
         add(grid, BorderLayout.CENTER);
 
-        // PREVIEW PANEL
+
         JPanel previewPanel = new JPanel(new BorderLayout());
         previewPanel.setPreferredSize(new Dimension(300, 0));
         previewPanel.setBackground(new Color(10,10,30,220));
         previewPanel.setBorder(BorderFactory.createLineBorder(neon, 2));
 
-        // IMAGE (BIG)
         previewImage = new JLabel();
         previewImage.setHorizontalAlignment(JLabel.CENTER);
 
-        // NAME
+
         previewName = new JLabel("Hover a character", JLabel.CENTER);
         previewName.setForeground(neon);
         previewName.setFont(new Font("Arial", Font.BOLD, 18));
 
-        // STATS
         previewStats = new JTextArea();
         previewStats.setEditable(false);
         previewStats.setOpaque(false);
         previewStats.setForeground(Color.WHITE);
 
-        // BIGGER FONT
+
         previewStats.setFont(new Font("Consolas", Font.BOLD, 18));
 
-        // CENTER TEXT (important trick)
         previewStats.setAlignmentX(Component.CENTER_ALIGNMENT);
         previewStats.setBorder(BorderFactory.createEmptyBorder(10,10,10,10));
 
-// Make text centered line-by-line
         previewStats.setComponentOrientation(ComponentOrientation.LEFT_TO_RIGHT);
 
-        // LAYOUT
+
         JPanel centerBox = new JPanel();
         centerBox.setOpaque(false);
         centerBox.setLayout(new BoxLayout(centerBox, BoxLayout.Y_AXIS));
@@ -127,7 +123,7 @@ public class CharacterSelect extends JPanel {
         previewImage.setAlignmentX(Component.CENTER_ALIGNMENT);
         previewStats.setAlignmentX(Component.CENTER_ALIGNMENT);
 
-        // ADD SPACING
+
         centerBox.add(Box.createVerticalStrut(20));
         centerBox.add(previewName);
         centerBox.add(Box.createVerticalStrut(15));
@@ -139,7 +135,6 @@ public class CharacterSelect extends JPanel {
 
         add(previewPanel, BorderLayout.EAST);
 
-        // TURN LABEL
         turnLabel = new JLabel("Player 1: Choose your fighter", JLabel.CENTER);
         turnLabel.setForeground(Color.WHITE);
         turnLabel.setFont(new Font("Arial", Font.BOLD, 14));
@@ -186,7 +181,6 @@ public class CharacterSelect extends JPanel {
         card.add(pic, BorderLayout.CENTER);
         card.add(label, BorderLayout.SOUTH);
 
-        // HOVER EFFECT
         card.addMouseListener(new MouseAdapter() {
 
             public void mouseEntered(MouseEvent e){
